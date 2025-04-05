@@ -20,10 +20,13 @@ go fmt
 
 if [[ -z $GITHUB_ACTIONS ]]; then
 	version=$(git describe)
-	version=1.2.3
+	# version=1.2.3
 fi
 
 ShowInfo "Version $version"
+
+ShowInfo "Remove old binary"
+rm ./aww
 
 ShowInfo "Build"
 CGO_ENABLED=0 go build -ldflags "-X 'aww/aww.Version=$version'"

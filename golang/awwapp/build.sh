@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 go get fyne.io/fyne/v2
+go install fyne.io/fyne/v2/cmd/fyne@latest
 
 function ShowInfo {
 	echo "--------------"
@@ -23,6 +24,9 @@ fi
 ShowInfo "Go fmt"
 go fmt
 
+ShowInfo "Remove old build"
+rm ./awwapp
+
 if [[ -z $GITHUB_ACTIONS ]]; then
 	version=$(git describe)
 	version=1.2.3
@@ -34,7 +38,10 @@ ShowInfo "Build"
 # CGO_ENABLED=0 go build -ldflags "-X 'awwapp/awwapp.Version=$version'"
 go build
 
-ShowInfo "Build version"
+ShowInfo "Build MacOS package"
+fyne package -os darwin -icon awwapp-image.png
+
+# ShowInfo "Build version"
 # ./aww --version
 # ./awwapp
 

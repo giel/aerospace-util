@@ -19,29 +19,16 @@ func main() {
 	// Proportional font (default)
 	proportionalLabel := widget.NewLabel("awwapp version: " + Version)
 
-	// Step 1: Get all workspaces
-	workspaces, err := asu.GetWorkspaces()
+	txtString := ""
+	lines, err := asu.GetWorkspaceWindowsSimple()
 	if err != nil {
-		fmt.Println("Error getting workspaces:", err)
-		return
+		txtString = fmt.Sprintf("Error getting workspaces:", err)
+	} else {
+		for _, line := range lines {
+			txtString += line + "\n"
+		}
 	}
 
-	// Step 2: For each workspace, list its windows
-	txtString := ""
-	for _, workspace := range workspaces {
-		windows, err := asu.GetWindows(workspace)
-		if err != nil {
-			fmt.Printf("  Error getting windows: %v\n", err)
-			continue
-		}
-		if len(windows) != 0 {
-			// fmt.Printf("Workspace: %s\n", workspace)
-			for _, window := range windows {
-				fmt.Printf("%s  %s\n", workspace, window)
-				txtString += fmt.Sprintf("%s  %s\n", workspace, window)
-			}
-		}
-	}
 	// Monospaced font
 	monospaceLabel := widget.NewLabel(txtString)
 	monospaceLabel.TextStyle = fyne.TextStyle{Monospace: true}
