@@ -7,11 +7,12 @@ function ShowInfo {
 }
 
 ShowInfo "Check directory"
-if [[ "$(basename "$PWD")" == "go" ]]; then
-	echo "Running in the 'go' directory."
+if [[ "$(basename "$PWD")" == "aww" ]]; then
+	echo "Running in the 'aww' directory."
 else
-	echo "Not running in the 'go' directory."
-	cd ./go
+	echo "Not running in the 'aww' directory, but in:"
+	echo "$PWD"
+	exit
 fi
 
 ShowInfo "Go fmt"
@@ -19,14 +20,14 @@ go fmt
 
 if [[ -z $GITHUB_ACTIONS ]]; then
 	version=$(git describe)
-	# version=1.2.3
+	version=1.2.3
 fi
 
 ShowInfo "Version $version"
 
 ShowInfo "Build"
-# CGO_ENABLED=0 go build -ldflags "-X 'aww/aww.Version=$version'"
-CGO_ENABLED=0 go build
+CGO_ENABLED=0 go build -ldflags "-X 'aww/aww.Version=$version'"
+# CGO_ENABLED=0 go build
 
 ShowInfo "Build version"
 # ./aww --version
