@@ -26,15 +26,15 @@ fi
 ShowInfo "Version $version"
 
 ShowInfo "Remove old binary"
-rm ./aww
+rm -f ./aww
 
 ShowInfo "Build"
-CGO_ENABLED=0 go build -ldflags "-X 'aww/aww.Version=$version'"
+CGO_ENABLED=0 go build -ldflags "-X 'golang/asu.Version=$version'"
 # CGO_ENABLED=0 go build
 
 ShowInfo "Build version"
-# ./aww --version
-./aww
+./aww --version
+# ./aww
 
 # ShowInfo "Test"
 # go test ./mgc_test

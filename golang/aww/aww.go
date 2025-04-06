@@ -8,7 +8,6 @@ import (
 )
 
 var AppName = "aww"
-var Version = "not set" // will be set by build.sh
 
 func main() {
 	versionFlag := flag.Bool("version", false, "Display the version of the program")
@@ -17,7 +16,7 @@ func main() {
 
 	// Handle the --version flag
 	if *versionFlag {
-		fmt.Printf("%s version %s\n", AppName, Version)
+		fmt.Printf("%s version %s\n", AppName, asu.Version)
 		os.Exit(0)
 	}
 

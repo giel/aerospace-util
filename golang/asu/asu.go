@@ -9,6 +9,7 @@ import (
 )
 
 var AeroSpacePath string
+var Version = "not set" // will be set by build.sh
 
 func GetWorkspaces() ([]string, error) {
 	cmd := exec.Command(AeroSpacePath, "list-workspaces", "--all")

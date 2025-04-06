@@ -10,14 +10,13 @@ import (
 )
 
 var AppName = "awwapp"
-var Version = "not set" // will be set by build.sh
 
 func main() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("awwapp")
 
 	// Proportional font (default)
-	proportionalLabel := widget.NewLabel("awwapp version: " + Version)
+	proportionalLabel := widget.NewLabel("awwapp version: " + asu.Version)
 
 	txtString := ""
 	lines, err := asu.GetWorkspaceWindowsSimple()

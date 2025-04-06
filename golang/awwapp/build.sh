@@ -25,21 +25,22 @@ ShowInfo "Go fmt"
 go fmt
 
 ShowInfo "Remove old build"
-rm ./awwapp
+rm -f ./awwapp
+rm -rf ./awwapp.app
 
 if [[ -z $GITHUB_ACTIONS ]]; then
 	version=$(git describe)
-	version=1.2.3
+	# version=1.2.3
 fi
 
 ShowInfo "Version $version"
 
 ShowInfo "Build"
-# CGO_ENABLED=0 go build -ldflags "-X 'awwapp/awwapp.Version=$version'"
-go build
+go build -ldflags "-X 'golang/asu.Version=$version'"
+# go build
 
-ShowInfo "Build MacOS package"
-fyne package -os darwin -icon awwapp-image.png
+ShowInfo "Wrap in MacOS package"
+fyne package -executable awwapp -os darwin -icon awwapp-image.png -appVersion=$version
 
 # ShowInfo "Build version"
 # ./aww --version
