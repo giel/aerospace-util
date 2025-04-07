@@ -21,6 +21,8 @@ func GetWorkspaces() ([]string, error) {
 }
 
 func GetWindows(workspace string) ([]string, error) {
+  // aerospace list-windows --all --format "%{monitor-id}%{tab}%{app-name}%{tab}%{window-title}"
+  // aerospace list-monitors
 	cmd := exec.Command(AeroSpacePath, "list-windows", "--workspace", workspace)
 	output, err := cmd.Output()
 	if err != nil {

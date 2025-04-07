@@ -1,10 +1,11 @@
 # aerospace utilities
-A set of utilities to complement aerospace.
+A set of utilities to complement [aerospace](https://github.com/nikitabobko/AeroSpace).
 
 `aww` is the cli tool to run in a terminal.
 
 `awwapp` is a windowed MacOS version to run in a GUI.
 
+At the moment both programs just show the workspaces and the windows in those workspaces.
 
 ## Installation one time
 ```bash
