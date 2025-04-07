@@ -5,7 +5,7 @@ go install fyne.io/fyne/v2/cmd/fyne@latest
 
 function ShowInfo {
 	echo "--------------"
-	echo "--" $1
+	echo -e "--" $1
 	echo "--------------"
 }
 
@@ -30,17 +30,20 @@ rm -rf ./awwapp.app
 
 if [[ -z $GITHUB_ACTIONS ]]; then
 	version=$(git describe)
+	short_version="${version%%-*}"
 	# version=1.2.3
 fi
 
-ShowInfo "Version $version"
+ShowInfo "Version"
+echo $version
+echo $short_version
 
 ShowInfo "Build"
 go build -ldflags "-X 'golang/asu.Version=$version'"
 # go build
 
 ShowInfo "Wrap in MacOS package"
-fyne package -executable awwapp -os darwin -icon awwapp-image.png -appVersion=$version
+fyne package -executable awwapp -os darwin -icon awwapp-image.png -appVersion=$short_version
 
 # ShowInfo "Build version"
 # ./aww --version
