@@ -16,7 +16,7 @@ else
 fi
 
 ShowInfo "Go fmt"
-go fmt
+gofmt -l -w . ../asu/
 
 if [[ -z $GITHUB_ACTIONS ]]; then
 	version=$(git describe)

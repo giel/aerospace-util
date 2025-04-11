@@ -21,9 +21,20 @@ func GetWorkspaces() ([]string, error) {
 }
 
 func GetWindows(workspace string) ([]string, error) {
-  // aerospace list-windows --all --format "%{monitor-id}%{tab}%{app-name}%{tab}%{window-title}"
-  // aerospace list-monitors
-	cmd := exec.Command(AeroSpacePath, "list-windows", "--workspace", workspace)
+	// aerospace list-windows --all --format "%{monitor-id}%{tab}%{app-name}%{tab}%{window-title}"
+	// aerospace list-monitors
+	// cmd := exec.Command(AeroSpacePath, "list-windows", "--workspace", workspace)
+	fmt := "(%{monitor-id})%{tab}%{app-name} : %{window-title}"
+	cmd := exec.Command(AeroSpacePath, "list-windows", "--format", fmt, "--workspace", workspace)
+	output, err := cmd.Output()
+	if err != nil {
+		return nil, err
+	}
+	return parseLines(output), nil
+}
+
+func GetMonitors() ([]string, error) {
+	cmd := exec.Command(AeroSpacePath, "list-monitors", "--format", "(%{monitor-id}) %{monitor-name}")
 	output, err := cmd.Output()
 	if err != nil {
 		return nil, err
@@ -51,13 +62,18 @@ func GetWorkspaceWindowsSimple() ([]string, error) {
 		if err != nil {
 			continue
 		}
-    for _, window := range windows {
-		if len(windows) != 0 {
-			txtString := fmt.Sprintf("%s  %s", workspace, window)
-			lines = append(lines, txtString)
+		for _, window := range windows {
+			if len(windows) != 0 {
+				txtString := fmt.Sprintf("%s  %s", workspace, window)
+				lines = append(lines, txtString)
+			}
 		}
-    }
 	}
+	monitors, err := GetMonitors()
+	if err == nil {
+		lines = append(lines, monitors...)
+	}
+
 	return lines, nil
 }
 
