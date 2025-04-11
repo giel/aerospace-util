@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+# todo: set to versioned build tools
 go get fyne.io/fyne/v2
-go install fyne.io/fyne/v2/cmd/fyne@latest
+go install fyne.io/tools/cmd/fyne@latest
 
 function ShowInfo {
 	echo "--------------"
@@ -43,12 +44,4 @@ go build -ldflags "-X 'golang/asu.Version=$version'"
 # go build
 
 ShowInfo "Wrap in MacOS package"
-fyne package -executable awwapp -os darwin -icon awwapp-image.png -appVersion=$short_version
-
-# ShowInfo "Build version"
-# ./aww --version
-# ./awwapp
-
-# ShowInfo "Test"
-# go test ./mgc_test
-# # go test -v ./mgc_test
+fyne package --executable awwapp --os darwin --icon awwapp-image.png --app-version $short_version
