@@ -3,7 +3,7 @@ A set of utilities to complement [aerospace](https://github.com/nikitabobko/Aero
 
 `aww` is the cli tool to run in a terminal.
 
-`awwapp` is a windowed MacOS version to run in a GUI.
+`awwapp` was a windowed MacOS version to run in a GUI. It is obsolete, since version 0.19.0 shows it in the main app toolbar. That is why it is removed from the repository.
 
 Both programs show the workspaces and the windows in those workspaces. Also the second column shows the monitor on wich the program is shown.
 
